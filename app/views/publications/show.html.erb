@@ -10,6 +10,18 @@
   <%= @publication.date %>
 </p>
 
+<ul>
+  <h2>Authors:</h2>
+  <% @authors.each do |auth| %>
+    <a href='/authors/<%= auth.id %>'>
+      <li class='hover-red'>
+        <%= auth.first_name %> <%= auth.last_name %>
+      </li>
+    </a>
+
+  <% end %>
+
+</ul>
 <p>
   <a href="http://scholar.google.com/scholar?hl=en&q=<%= @publication.title %>"> google scholar link: <%= @publication.title %> </a>
 </p>

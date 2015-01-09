@@ -55,6 +55,7 @@ class PublicationsController < ApplicationController
   # GET /publications/1
   # GET /publications/1.json
   def show
+    @authors = @publication.authors
   end
 
   # GET /publications/new

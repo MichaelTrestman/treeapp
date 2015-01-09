@@ -21,3 +21,6 @@ body, html {
 .bordered {
   border: solid 1px black;
 }
+.hover-red:hover {
+  color: red;
+}

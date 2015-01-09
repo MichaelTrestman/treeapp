@@ -10,5 +10,9 @@
   <%= @publication.date %>
 </p>
 
+<p>
+  <a href="http://scholar.google.com/scholar?hl=en&q=<%= @publication.title %>"> google scholar link: <%= @publication.title %> </a>
+</p>
+
 <%= link_to 'Edit', edit_publication_path(@publication) %> |
 <%= link_to 'Back', publications_path %>

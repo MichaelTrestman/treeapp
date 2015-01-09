@@ -10,6 +10,13 @@ class AuthorsController < ApplicationController
   # GET /authors/1
   # GET /authors/1.json
   def show
+    @author_pubs = Publication.all.select{ |pub| pub.authors.select{ |auth|  auth == @author }.length > 0  }
+    @author_coauths = []
+    @author_pubs.each do |pub|
+      pub.authors.each {|coauth| @author_coauths.push coauth }
+    end
+    @author_coauths.uniq!
+    @author_coauths.delete(@author)
   end
 
   # GET /authors/new

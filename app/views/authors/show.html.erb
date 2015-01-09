@@ -10,5 +10,32 @@
   <%= @author.last_name %>
 </p>
 
+<p>
+  <a href='http://scholar.google.com/scholar?as_q=&as_epq=&as_oq=&as_eq=&as_occt=any&as_sauthors=<%=@author.first_name%>+ <%=@author.last_name%>&as_publication=&as_ylo=&as_yhi=&btnG=&hl=en&as_sdt=0%2C5'>
+    google scholar link
+  </a>
+</p>
+
+<ul>
+  <h2>Publications:</h2>
+  <% @author_pubs.each do |pub| %>
+    <a href="/publications/<%= pub.id %>" class="hover-red">
+      <li>
+        <%= pub.title %> (<%= pub.date %>)
+      </li>
+    </a>
+  <% end %>
+</ul>
+<ul>
+  <h2>Co-authors:</h2>
+  <% @author_coauths.each do |coauth| %>
+    <a href="/authors/<%= coauth.id %>" class="hover-red">
+      <li>
+        <%= coauth.first_name %> (<%= coauth.last_name %>)
+      </li>
+    </a>
+  <% end %>
+</ul>
+
 <%= link_to 'Edit', edit_author_path(@author) %> |
 <%= link_to 'Back', authors_path %>

@@ -1,0 +1,99 @@
+Empirical methods
+* conditioning
+* trace conditioning
+* operant conditioning
+* self-report
+* pain scale
+* language
+* playback
+* computational modeling
+* naturalistic observation
+* transfer task
+* lesion study
+* fMRI
+* EEG
+* single cell
+* hormonal assay
+* drug manipulation
+* maze learning
+* gene knockouts
+* optogenetics
+* brain stimulation
+* mirror mark test
+* puzzle box
+
+Psychological capacity/type
+
+
+* perceptual integration
+
+* decision-making
+
+* self-recognition
+* metacognition
+* theory of mind / mind reading
+* learning
+
+* trace conditioning
+* operant conditioning
+* social learning
+* social bonding
+* empathy
+* imitation
+* episodic / episodic-like memory
+* communication
+* deception
+* pain
+* causal reasoning
+* transitive inference
+* narrative construction
+* observational learning
+* play
+* emotional fever
+* tool making
+* emotion
+* fear
+* anger
+* joy
+* grief
+* disgust
+* sadness
+
+
+
+Theories of Consciousness
+* language possession
+* rationality
+* first order representation
+* higher order representation
+* dualism
+* epiphenomenalism
+* global workspace
+* information integration
+* sensorimotor integration
+* time integration
+* perceptual stability
+* primary consciousness
+* access consciousness
+* qualia
+* hedonicity/affect
+* enactivism
+
+Adaptive function
+* social relations
+* learning
+* action selection / prioritization
+* behavioral control
+* environmental complexity
+* no function identified
+
+Type of item
+
+
+* review article
+* opinion piece
+* experimental report
+* book review
+* book précis
+* philosophical argument paper
+* book

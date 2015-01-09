@@ -1,3 +1,14 @@
+
+File.open('db/topic_seeds.txt').readlines.each do |line|
+  lineArr = line.split(' ')
+  if lineArr[0] == '*'
+    lineArr.shift
+    line = lineArr.join(' ')
+    Topic.create({title: line}) unless Topic.where({title: line}).length
+  end
+end
+
+
 require_relative "publication_seeds"
 
 def log_pubs pubs
@@ -43,4 +54,7 @@ def log_pubs pubs
 end
 
 log_pubs $pub_seeds
+
+
+
 

@@ -1,0 +1,23 @@
+body, html {
+  width: 100%;
+}
+.blue-br {
+  background-color: blue;
+}
+.fixed {
+  position: fixed;
+}
+.top {
+  top: 0%;
+}
+.height10{
+  height: 10%;
+}
+.top10 {
+  top: 10%;
+}
+.full-width { width: 100%;}
+
+.bordered {
+  border: solid 1px black;
+}

@@ -17,6 +17,7 @@
     <tr>
       <th>Title</th>
       <th>Date</th>
+      <th>First Author</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -25,11 +26,10 @@
   <tbody>
     <% @publications.each do |publication| %>
       <tr>
-        <td><%= publication.title %></td>
+        <td><%= link_to publication.title, publication %></td>
         <td><%= publication.date %></td>
-        <td><%= link_to 'Show', publication %></td>
-        <td><%= link_to 'Edit', edit_publication_path(publication) %></td>
-        <td><%= link_to 'Destroy', publication, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td> <%= publication.authors[0].last_name %> </td>
+
       </tr>
     <% end %>
   </tbody>

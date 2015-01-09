@@ -17,18 +17,6 @@ class PublicationsController < ApplicationController
         '
     end
 
-    if params[:author] && params[:author] != ""
-
-        query_string += "AND " if query_string != ""
-
-        query_string += '
-          (author LIKE :author_downcase
-          OR
-          author LIKE :author_capitalize
-          OR
-          author LIKE :author_upcase)
-        '
-    end
 
     if params[:date] && params[:date] != ""
 
@@ -37,23 +25,31 @@ class PublicationsController < ApplicationController
       query_string += 'date LIKE :pub_date'
     end
 
-      if query_string == ""
-        @publications = Publication.all
-      else
-        @publications = Publication.where(query_string,
-          title_downcase: "%#{params[:title].downcase}%",
-          title_capitalize: "%#{params[:title].capitalize}%",
-          title_upcase: "%#{params[:title].upcase}%",
+    if query_string == ""
+      @publications = Publication.all
+    else
+      @publications = Publication.where(query_string,
+        title_downcase: "%#{params[:title].downcase}%",
+        title_capitalize: "%#{params[:title].capitalize}%",
+        title_upcase: "%#{params[:title].upcase}%",
+        pub_date: "%#{params[:date]}%"
+      )
+    end
 
-          author_downcase: "%#{params[:author].downcase}%",
-          author_capitalize: "%#{params[:author].capitalize}%",
-          author_upcase: "%#{params[:author].upcase}%",
 
-          pub_date: "%#{params[:date]}%"
-        )
+    if params[:author] && params[:author] != ""
+      author_queries = params[:author].split(' ')
+      author_queries.each do |query|
+        @publications = @publications
+          .select{ |pub|
+            pub.authors.any? { |auth|
+              # auth.first_name == query.capitalize
+
+              auth.last_name == query.capitalize
+            }
+          }
       end
-
-
+    end
   end
 
   # GET /publications/1

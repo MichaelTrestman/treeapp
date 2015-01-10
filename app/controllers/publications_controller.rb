@@ -26,14 +26,14 @@ class PublicationsController < ApplicationController
     end
 
     if query_string == ""
-      @publications = Publication.all
+      @publications = Publication.all.order(:title)
     else
       @publications = Publication.where(query_string,
         title_downcase: "%#{params[:title].downcase}%",
         title_capitalize: "%#{params[:title].capitalize}%",
         title_upcase: "%#{params[:title].upcase}%",
         pub_date: "%#{params[:date]}%"
-      )
+      ).order(:title)
     end
 
 

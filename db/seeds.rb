@@ -1,95 +1,95 @@
-# previous_name = {}
+previous_name = {}
 
-# File.open('db/biblio.txt').readlines.each do |line|
-
-
-#   lineAry = line.split('(')
-#   names = lineAry.shift
-#   lineAry = lineAry[0].split(')')
-#   date = lineAry.shift
-#   remainder = lineAry[0]
-#   # p names
-#   p date
-
-#   remainder = remainder.split('').slice(2, 9999).join('')
-#   title = remainder.split('.')[0]
-#   p title
-
-#   # unless names == '––– ' || names == 'Institute for Laboratory Animal Research '
-
-#   authors = []
-
-#   names = names.split(',').select{ |name| name != ' et al. '}.map{|name| name.gsub(' ', '').gsub('&', '')}
+File.open('db/biblio.txt').readlines.each do |line|
 
 
-#   puts "************"
-#   p previous_name
+  lineAry = line.split('(')
+  names = lineAry.shift
+  lineAry = lineAry[0].split(')')
+  date = lineAry.shift
+  remainder = lineAry[0]
+  # p names
+  p date
 
-#   if names[0].split('')[1] == "–"
+  remainder = remainder.split('').slice(2, 9999).join('')
+  title = remainder.split('.')[0]
+  p title
 
-#     puts "$$$ what the fuck Akins"
-#     p previous_name
+  # unless names == '––– ' || names == 'Institute for Laboratory Animal Research '
 
-#     authors << previous_name
+  authors = []
 
-#   elsif names[0] == 'Institute for Laboratory Animal Research '.gsub(' ', '').gsub('&', '')
-
-#     previous_name = {
-#       first_name: 'The',
-#       last_name: names[0]
-#     }
-
-#     authors << previous_name.clone
-
-#   elsif names.length % 2 == 0
-
-#     while names.length > 0
-
-#       raise "fucked up number of name segments; names: #{names}" unless names.length % 2 == 0
-
-#       last_name = names.shift
-#       first_name = names.shift
-
-#       previous_name = {
-#         first_name: first_name,
-#         last_name: last_name
-#       }
-#       authors << previous_name.clone
-#     end
-#   end
+  names = names.split(',').select{ |name| name != ' et al. '}.map{|name| name.gsub(' ', '').gsub('&', '')}
 
 
-#   if Publication.where({title: title, date: date}).count > 0
+  puts "************"
+  p previous_name
 
-#     new_pub = Publication.where({
-#       title: title,
-#       date: date
-#     })[0]
-#     p ("found existing pub#{new_pub.title}")
+  if names[0].split('')[1] == "–"
 
-#   else
+    puts "$$$ what the fuck Akins"
+    p previous_name
 
-#     new_pub = Publication.create({
-#       title: title,
-#       date: date
-#     })
-#     p "created new pub#{new_pub.title}"
+    authors << previous_name
 
-#   end
+  elsif names[0] == 'Institute for Laboratory Animal Research '.gsub(' ', '').gsub('&', '')
 
-#   authors.each do |author|
+    previous_name = {
+      first_name: 'The',
+      last_name: names[0]
+    }
 
-#     if Author.where(author).count > 0
-#       this_author = Author.where(author)[0]
-#     else
-#       this_author = Author.create(author)
-#     end
+    authors << previous_name.clone
 
-#     unless new_pub.authors.any? {|auth| this_author == auth }
-#       new_pub.authors << this_author
-#     end
-#   end
-# end
+  elsif names.length % 2 == 0
+
+    while names.length > 0
+
+      raise "fucked up number of name segments; names: #{names}" unless names.length % 2 == 0
+
+      last_name = names.shift
+      first_name = names.shift
+
+      previous_name = {
+        first_name: first_name,
+        last_name: last_name
+      }
+      authors << previous_name.clone
+    end
+  end
+
+
+  if Publication.where({title: title, date: date}).count > 0
+
+    new_pub = Publication.where({
+      title: title,
+      date: date
+    })[0]
+    p ("found existing pub#{new_pub.title}")
+
+  else
+
+    new_pub = Publication.create({
+      title: title,
+      date: date
+    })
+    p "created new pub#{new_pub.title}"
+
+  end
+
+  authors.each do |author|
+
+    if Author.where(author).count > 0
+      this_author = Author.where(author)[0]
+    else
+      this_author = Author.create(author)
+    end
+
+    unless new_pub.authors.any? {|auth| this_author == auth }
+      new_pub.authors << this_author
+    end
+  end
+end
 
 
 File.open('db/topic_seeds.txt').readlines.each do |line|

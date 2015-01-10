@@ -1,5 +1,5 @@
 class PublicationsController < ApplicationController
-  before_action :set_publication, only: [:show, :edit, :update, :destroy]
+  before_action :set_publication, only: [:show, :edit, :update, :destroy, :viz]
 
   # GET /publications
   # GET /publications.json
@@ -56,6 +56,35 @@ class PublicationsController < ApplicationController
   # GET /publications/1.json
   def show
     @authors = @publication.authors
+  end
+  def viz
+    puts "***************************"
+    p @publication
+
+    data = {
+      root_pub_title: @publication.title,
+      root_pub_date: @publication.date,
+      children: []
+    }
+
+    @publication.authors.each do |auth|
+
+      auth_pubs = []
+
+      auth.publications.each { |pub| auth_pubs << {
+          title: pub.title,
+          date: pub.date
+        }
+      }
+
+      data[:children] << {
+        author_name: auth.first_name + " " + auth.last_name,
+        children: auth_pubs
+      }
+
+    end
+
+    render :json => data
   end
 
   # GET /publications/new

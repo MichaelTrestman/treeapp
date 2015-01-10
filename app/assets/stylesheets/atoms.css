@@ -24,3 +24,14 @@ body, html {
 .hover-red:hover {
   color: red;
 }
+.modalize {
+  position: fixed;
+  z-index: 10;
+  top: 30%;
+  left: 0%;
+  height: 80%;
+  width: 60%;
+  background-color: rgba(10, 10, 10, 0.5);
+  overflow: scroll;
+  min-height: 0;
+}

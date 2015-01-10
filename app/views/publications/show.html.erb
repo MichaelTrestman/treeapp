@@ -28,3 +28,18 @@
 
 <%= link_to 'Edit', edit_publication_path(@publication) %> |
 <%= link_to 'Back', publications_path %>
+
+<svg id="publication-show" class='modalize bordered'/>
+
+<%= javascript_tag defer: 'defer' do -%>
+
+  var id = <%= escape_javascript(@publication.id.to_s)%>;
+  console.log(id)
+  $.ajax({
+    url: "/publications/viz/" + id.toString()
+  }).done(function(data){
+
+    PubForceViz(data);
+  })
+
+<% end -%>

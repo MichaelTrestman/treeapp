@@ -1,3 +1,4 @@
+
 <div class=''>
   <ul class='display-flex-row justify-around width-100 bordered'>
     <li class='no-list-styles margin-1'><h3><a href='/'>welcome</a></h3></li>
@@ -5,5 +6,11 @@
     <li class='no-list-styles margin-1'><h3><a href='/publications'>publications</a></h3></li>
     <li class='no-list-styles margin-1'><h3><a href='/authors'>authors</a></h3></li>
     <li class='no-list-styles margin-1'><h3><a href='/topics'>topics</a></h3></li>
+    <% if session[:contributor_id]  %>
+      <li class='bordered'><a href='/logout'>logout</a></li>
+    <% else %>
+      <li class='bordered'><a href='/login'>login</a></li>
+    <% end %>
+
   </ul>
 </div>

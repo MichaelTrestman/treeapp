@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get 'welcome/about' => 'welcome#about'
 
+  get 'logout' => 'sessions/logout'
+  get 'login' => 'sessions/login'
+  get 'signup' => 'sessions/singup'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

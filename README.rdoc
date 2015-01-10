@@ -1,5 +1,54 @@
 == README
 
+
+things to do:
+
+
+  web-scraper (from scholar.google?):
+
+    citation count for pubs
+
+    publication count for authors
+
+  text-scraper:
+    taxon mentions
+
+
+  newick => json conversion
+
+  visualizations:
+
+    publications:
+
+      list visualizations, which should be dynamically generated for a given set of publications (i.e. the set that passes search filters)
+
+        network ones (citation, authorship/co-authorship)
+
+        quantitative ordering ones (citation count...)
+
+      show visualizations, which are centered on a given publication
+
+        force tree with links to authors, date, and their associated pubs
+
+  index for tags
+
+  show for tags
+
+    list of pubs
+
+
+  distribution hypothesis
+
+    a pub can argue for or against
+
+
+
+
+  easy interface for adding tags to pubs
+
+
+
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 

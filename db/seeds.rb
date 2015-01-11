@@ -1,6 +1,6 @@
 previous_name = {}
 
-File.open('db/biblio.txt').readlines.each do |line|
+File.open('db/animal_consciousness_SEP_biblio.txt').readlines.each do |line|
 
 
   lineAry = line.split('(')

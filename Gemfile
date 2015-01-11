@@ -38,6 +38,8 @@ ruby '2.0.0'
 # gem 'capistrano-rails', group: :development
 
 # Use debugger
-# gem 'debugger', group: [:development, :test]
+gem 'debugger', group: [:development, :test]
 
 gem "rspec-rails", :group => [:development, :test]
+
+gem 'nokogiri', :group => [:development]

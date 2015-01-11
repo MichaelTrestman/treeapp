@@ -17,7 +17,6 @@ class PublicationsController < ApplicationController
         '
     end
 
-
     if params[:date] && params[:date] != ""
 
       query_string += "AND " if query_string != ""
@@ -25,15 +24,23 @@ class PublicationsController < ApplicationController
       query_string += 'date LIKE :pub_date'
     end
 
+    sort_orders = {
+      'alpha' => :title,
+      'citations' => :title,
+      'date' => :date
+    }
+
+    sort_order = sort_orders[params[:sort_order]] ||= :title
+
     if query_string == ""
-      @publications = Publication.all.order(:title)
+      @publications = Publication.all.order(sort_order)
     else
       @publications = Publication.where(query_string,
         title_downcase: "%#{params[:title].downcase}%",
         title_capitalize: "%#{params[:title].capitalize}%",
         title_upcase: "%#{params[:title].upcase}%",
         pub_date: "%#{params[:date]}%"
-      ).order(:title)
+      ).order(sort_order)
     end
 
 

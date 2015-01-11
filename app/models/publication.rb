@@ -1,3 +1,7 @@
+require 'nokogiri'
+require 'open-uri'
+require 'debugger'
+
 class Publication < ActiveRecord::Base
 
   has_many :authorships
@@ -12,4 +16,29 @@ class Publication < ActiveRecord::Base
   # has_many :taxons, through: :distributions
   # has_many :tags
   # has_many :topics, through: :tags
+  def self.scrape_in_a_few_citations n=1
+    n.times do
+      pub = Publication.where({citation_count: nil}).sample
+      pub.scrape_scholar_for_citation_count
+    end
+  end
+  def scrape_scholar_for_citation_count
+    google_scholar_url = "https://scholar.google.com/scholar?as_q=#{self.title.split(' ').join('+')}&as_epq=&as_oq=&as_eq=&as_occt=any&as_sauthors=&as_publication=&as_ylo=&as_yhi=&btnG=&hl=en&as_sdt=0%2C5"
+
+
+    # google_scholar_url = "https://scholar.google.com/scholar?as_q=#{self.title.split(' ').join('+')}&as_epq=&as_oq=&as_eq=&as_occt=any&as_sauthors=#{self.authors.each{|author| author.last_name}.gsub('[', '').gsub(']', '')}&as_publication=&as_ylo=&as_yhi=&btnG=&hl=en&as_sdt=0%2C5"
+
+
+    # puts google_scholar_url
+    page = Nokogiri::HTML(open( google_scholar_url ))
+    top_result = page.css('.gs_r')[0]
+
+    if top_result.text.gsub('.', ' ').split('Cited by ')[1]
+      citation_count = top_result.text.gsub('.', ' ').split('Cited by ')[1].split(' ')[0].to_i
+    else
+      citation_count = "unknown"
+    end
+  end
 end
+
+

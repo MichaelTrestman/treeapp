@@ -1,16 +1,42 @@
-<h1>Listing publications</h1>
+<div class='clear-left bordered margin-1'>
+<h1>Publications</h1>
 
-<form id='publications search-form'>
-  <h2>Search restrictions</h2>
-  Title includes words:
-  <input type='text' name='title' value= "<%=params[:title]  %>" ><br>
-  Authors includes words:
-  <input type='text' name='author' value= "<%=params[:author]  %>"><br>
-  publication date:
-  <input type='text' name='date' value= "<%=params[:date]  %>"><br>
+<form id='bordered publications search-form'>
+
+  <div class=' margin-1 display-block'>
+    <h3>Sort by:</h3>
+    <ul class='display-flex-row'>
+        <li class='no-list-styles '><input type="radio" name="sort_order" value="alpha" checked>alpha</li>
+        <li class='no-list-styles '><input type="radio" name="sort_order" value="citations">citations</li>
+        <li class='no-list-styles '><input type="radio" name="sort_order" value="date">date</li>
+    </ul>
+  </div>
+
+<div class=' margin-1'>
+  <h3 class='clear-left'>Filter results:</h3>
+  <div class='float-left no-clear margin-1 no-list-styles'>
+  </div>
+  <ul class='display-flex-row'>
+    <li class='float-left no-clear margin-1 no-list-styles'>Title includes words:
+      <input type='text' name='title' value= "<%=params[:title]  %>" ><br>
+    </li>
+
+    <li class='float-left no-clear margin-1 no-list-styles'>Authors includes words:
+      <input type='text' name='author' value= "<%=params[:author]  %>"><br>
+    </li>
+
+    <li class='float-left no-clear margin-1 no-list-styles'>publication year:
+      <input type='text' name='date' value= "<%=params[:date]  %>"><br>
+    </li>
+
+    <li class='float-left no-clear margin-1 no-list-styles'>Topics:
+      <input type='text' name='topics' value= "<%=params[:topics]  %>"><br>
+    </li>
+
+  </ul>
   <input type="submit" value="Submit">
 </form>
-
+</div>
 
 <table>
   <thead>
@@ -38,3 +64,4 @@
 <br>
 
 <%= link_to 'New Publication', new_publication_path %>
+</div>

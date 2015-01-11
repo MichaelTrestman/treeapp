@@ -1,5 +1,6 @@
 class PublicationsController < ApplicationController
   before_action :set_publication, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:edit, :update, :destroy]
 
   # GET /publications
   # GET /publications.json
@@ -93,15 +94,17 @@ class PublicationsController < ApplicationController
   # PATCH/PUT /publications/1
   # PATCH/PUT /publications/1.json
   def update
-    respond_to do |format|
-      if @publication.update(publication_params)
-        format.html { redirect_to @publication, notice: 'Publication was successfully updated.' }
-        format.json { render :show, status: :ok, location: @publication }
-      else
-        format.html { render :edit }
-        format.json { render json: @publication.errors, status: :unprocessable_entity }
-      end
+
+
+
+    if @publication.update(publication_params)
+      # format.html { redirect_to @publication, notice: 'Publication was successfully updated.' }
+      # format.json { render :show, status: :ok, location: @publication }
+    else
+      # format.html { render :edit }
+      # format.json { render json: @publication.errors, status: :unprocessable_entity }
     end
+
   end
 
   # DELETE /publications/1

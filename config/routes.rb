@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :publications
 
   resources :topics
+  # resources :contributors, only: [:new, :create, :destroy]
+  resources :sessions, only: [:new, :create, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -13,9 +15,9 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get 'welcome/about' => 'welcome#about'
 
-  get 'logout' => 'sessions/logout'
-  get 'login' => 'sessions/login'
-  get 'signup' => 'sessions/singup'
+  get 'logout' => 'sessions#logout'
+  get 'loginz' => 'sessions#loginz'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

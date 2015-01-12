@@ -1,15 +1,18 @@
 
-<div class=''>
-  <ul class='display-flex-row justify-around width-100 bordered'>
-    <li class='no-list-styles margin-1'><h3><a href='/'>welcome</a></h3></li>
-    <li class='no-list-styles margin-1'><h3><a href='/welcome/about'>about</a></h3></li>
-    <li class='no-list-styles margin-1'><h3><a href='/publications'>publications</a></h3></li>
-    <li class='no-list-styles margin-1'><h3><a href='/authors'>authors</a></h3></li>
-    <li class='no-list-styles margin-1'><h3><a href='/topics'>topics</a></h3></li>
-    <% if session[:contributor_id]  %>
-      <li class='no-list-styles margin-1'><h3><a href='/logout'>logout <%= session[:contributor_name] %></a></h3></li>
-    <% else %>
-      <li class='no-list-styles margin-1'><h4><a href='/loginz'>contributor login</a></h4></li>
-    <% end %>
-  </ul>
+<div class='navbar navbar-default'>
+  <div class='container-fluid'>
+    <ul class='container-fluid'>
+      <li class='  navbar-nav nav pull-left padding-10'><h3><a href='/'>welcome</a></h3></li>
+
+      <li class='  navbar-nav nav pull-left padding-10'><h3><a href='/publications'>publications</a></h3></li>
+      <li class='  navbar-nav nav pull-left padding-10'><h3><a href='/authors'>authors</a></h3></li>
+      <li class='  navbar-nav nav pull-left padding-10'><h3><a href='/topics'>topics</a></h3></li>
+
+      <% if session[:contributor_id]  %>
+        <li class='  navbar-nav nav pull-right padding-10'><h3><a href='/logout'>logout <%= session[:contributor_name] %></a></h3></li>
+      <% else %>
+        <li class='  navbar-nav nav pull-right'><h4><a href='/loginz'>contributor login</a></h4></li>
+      <% end %>
+    </ul>
+  </div>
 </div>

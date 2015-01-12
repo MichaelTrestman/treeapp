@@ -1,54 +1,6 @@
-<div class=' clear-left margin-1'>
-<h1>Topics</h1>
+<h1>Listing topics</h1>
 
-<div class=''>
-<form class='publications search-form float-left clear-left bordered '>
-
-  <div class=' margin-1  clear-none float-left'>
-    <h3>Sort by:</h3>
-    <ul class='display-flex-row'>
-        <li class='no-list-styles '><input type="radio" name="sort_order" value="alpha" checked>alpha</li>
-        <li class='no-list-styles '><input type="radio" name="sort_order" value="linked publications count">linked publications count</li>
-    </ul>
-  </div>
-  <div class=' margin-1  clear-none float-left'>
-    <h3>Show types:</h3>
-    <ul class='display-flex-row'>
-        <li class='no-list-styles '><input type="radio" name="sort_order" value="subject" checked>subject</li>
-        <li class='no-list-styles '><input type="radio" name="sort_order" value="taxon" checked>taxon</li>
-        publications count</li>
-    </ul>
-  </div>
-
-  <div class=' margin-1  clear-none float-left'>
-    <h3 class='clear-left'>Filter results:</h3>
-    <div class='float-left no-clear margin-1 no-list-styles'>
-    </div>
-    <ul class='display-flex-row'>
-      <li class='float-left no-clear margin-1 no-list-styles'>Name includes words:
-        <input type='text' name='name' value= "<%=params[:name]  %>" ><br>
-      </li>
-
-      <li class='float-left no-clear margin-1 no-list-styles'>Publication titles include words:
-        <input type='text' name='publicationtitles' value= "<%=params[:publicationtitles]  %>"><br>
-      </li>
-
-      <li class='float-left no-clear margin-1 no-list-styles'>Published in year:
-        <input type='text' name='date' value= "<%=params[:date]  %>"><br>
-      </li>
-
-      <li class='float-left no-clear margin-1 no-list-styles'>Topics of associated publications:
-        <input type='text' name='topics' value= "<%=params[:topics]  %>"><br>
-      </li>
-
-    </ul>
-    <input type="submit" value="Submit">
-  </div>
-</form>
-</div>
-</div>
-
-<table>
+<table class='table table-striped'>
   <thead>
     <tr>
       <th>Title</th>
@@ -57,12 +9,11 @@
   </thead>
 
   <tbody>
-    <% @topics.each do |topic| %>
-      <tr>
-        <td><%= topic.title %></td>
-        <td><%= link_to 'Show', topic %></td>
-        <td><%= link_to 'Edit', edit_topic_path(topic) %></td>
-        <td><%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% @topics.each_with_index do |topic, i| %>
+      <tr class=' <%=  i % 2 == 0 ? "" : "" %> '>
+
+        <td><%= link_to topic.title, topic %></td>
+
       </tr>
     <% end %>
   </tbody>

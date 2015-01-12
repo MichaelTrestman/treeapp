@@ -4,6 +4,7 @@
   <strong>Title:</strong>
   <%= @topic.title %>
 </p>
-
-<%= link_to 'Edit', edit_topic_path(@topic) %> |
-<%= link_to 'Back', topics_path %>
+<% if session[:contributor_id] %>
+  <%= link_to 'Edit', edit_topic_path(@topic) %> |
+  <%= link_to 'Back', topics_path %>
+<% end %>

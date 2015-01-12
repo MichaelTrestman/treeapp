@@ -10,8 +10,20 @@
   <%= @publication.date %>
 </p>
 
+<h2>Authors:</h2>
 <ul>
-  <h2>Authors:</h2>
+  <% @authors.each do |auth| %>
+      <li class='hover-red'>
+        <a href='/authors/<%= auth.id %>'>
+          <%= auth.first_name %> <%= auth.last_name %>
+        </a>
+      </li>
+
+  <% end %>
+
+</ul>
+<h2>Topics</h2>
+<ul>
   <% @authors.each do |auth| %>
     <a href='/authors/<%= auth.id %>'>
       <li class='hover-red'>
@@ -20,11 +32,12 @@
     </a>
 
   <% end %>
-
 </ul>
+
 <p>
   <a href="http://scholar.google.com/scholar?hl=en&q=<%= @publication.title %>"> google scholar link: <%= @publication.title %> </a>
 </p>
-
-<%= link_to 'Edit', edit_publication_path(@publication) %> |
-<%= link_to 'Back', publications_path %>
+<% if session[:contributor_id] %>
+  <%= link_to 'Edit', edit_publication_path(@publication) %> |
+  <%= link_to 'Back', publications_path %>
+<% end %>

@@ -51,4 +51,8 @@ body, html {
   clear: none;
 }
 .margin-1 { margin: 1%;}
+.padding-10 { padding: 0% 3%;}
 .no-list-styles {list-style: none;}
+.gray {
+  background-color: rgba(190, 190, 190, 0.5);
+}

@@ -7,10 +7,9 @@
   <div class=' margin-1 display-block'>
     <h3>Sort by:</h3>
     <ul class='display-flex-row'>
-        <li class='no-list-styles '><input type="radio" name="sort_order" value="alpha" checked>alpha</li>
-        <li class='no-list-styles '><input type="radio" name="sort_order" value="citations">citations</li>
-
-        <li class='no-list-styles '><input type="radio" name="sort_order" value="date">date</li>
+        <li class='no-list-styles '><input type="radio" name="sort_order" value="alpha" <%= "checked" if params[:sort_order] == 'alpha' %>>alpha</li>
+        <li class='no-list-styles '><input type="radio" name="sort_order" value="citations" <%= "checked" if params[:sort_order] == 'citations' %>>citations</li>
+        <li class='no-list-styles '><input type="radio" name="sort_order" value="date" <%= "checked" if params[:sort_order] == 'date' %>>date</li>
     </ul>
   </div>
 

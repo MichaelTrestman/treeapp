@@ -1,0 +1,41 @@
+
+
+function Cat (vocalization){
+  this.meow = vocalization
+}
+
+Cat.prototype.pet = function(){
+  console.log (this.meow)
+}
+
+Cat.prototype.shred = function(){
+  var args = Array.prototype.slice.call(arguments);
+
+  args.forEach(function(thingToShred, i){
+
+    console.log("The " + thingToShred + " has been shredded!")
+
+    if (args.length - 1 > i) {
+      console.log(this.meow)
+    };
+
+  }.bind(this))
+}
+var kitty = new Cat ('meow')
+kitty.shred( 'couch')
+
+
+
+
+Function.prototype.bindd = function(thingToBindTo){
+  var that = this;
+  return function(){ that.call(thingToBindTo, arguments) }
+}
+
+whatever.bindd(someThing)
+
+
+function(thing){
+  return function(){ console.log (thing)}
+}
+

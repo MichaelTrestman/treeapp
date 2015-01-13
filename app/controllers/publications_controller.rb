@@ -5,9 +5,7 @@ class PublicationsController < ApplicationController
   # GET /publications
   # GET /publications.json
   def index
-
     query_string = ""
-
     if params[:title] && params[:title] != ""
         query_string += '
         (title LIKE :title_downcase
@@ -19,15 +17,13 @@ class PublicationsController < ApplicationController
     end
 
     if params[:date] && params[:date] != ""
-
       query_string += "AND " if query_string != ""
-
       query_string += 'date LIKE :pub_date'
     end
 
     sort_orders = {
       'alpha' => :title,
-      'citations' => :title,
+      'citations' => :citation_count,
       'date' => :date
     }
 

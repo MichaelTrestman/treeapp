@@ -3,7 +3,7 @@
 # require 'debugger'
 
 class Publication < ActiveRecord::Base
-
+  extend ApplicationHelper
   has_many :authorships
   has_many :authors, through: :authorships
 

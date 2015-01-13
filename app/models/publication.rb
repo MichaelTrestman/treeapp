@@ -29,7 +29,9 @@ class Publication < ActiveRecord::Base
     seed_txt = File.open('db/citation_count_seed.txt', 'r')
       seed_txt.each do |line|
         line = line.gsub("\n", '').split('|')
-        Publication.where({title: line[0], date: line[1]})[0].citation_count = line[2]
+        pub = Publication.where({title: line[0], date: line[1]})[0]
+        pub.citation_count = line[2]
+        pub.save
       end
   end
   def self.scrape_scholar_for_citation_count

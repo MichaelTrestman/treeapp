@@ -94,15 +94,15 @@ class PublicationsController < ApplicationController
   # PATCH/PUT /publications/1
   # PATCH/PUT /publications/1.json
   def update
-
-    if @publication.update(publication_params)
-      format.html { redirect_to @publication, notice: 'Publication was successfully updated.' }
-      format.json { render :show, status: :ok, location: @publication }
-    else
-      format.html { render :edit }
-      format.json { render json: @publication.errors, status: :unprocessable_entity }
+    respond_to do |format|
+      if @publication.update(publication_params)
+        format.html { redirect_to @publication, notice: 'Publication was successfully updated.' }
+        format.json { render :show, status: :ok, location: @publication }
+      else
+        format.html { render :edit }
+        format.json { render json: @publication.errors, status: :unprocessable_entity }
+      end
     end
-
   end
 
   # DELETE /publications/1

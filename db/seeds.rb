@@ -1,153 +1,107 @@
-previous_name = {}
+require_relative 'heroku_citation_seeder'
+# HerokuCitationSeeder.new.create_seed_txt
+HerokuCitationSeeder.new.seed_from_txt
 
-File.open('db/animal_consciousness_SEP_biblio.txt').readlines.each do |line|
+# previous_name = {}
 
-
-  lineAry = line.split('(')
-  names = lineAry.shift
-  lineAry = lineAry[0].split(')')
-  date = lineAry.shift
-  remainder = lineAry[0]
-  # p names
-  p date
-
-  remainder = remainder.split('').slice(2, 9999).join('')
-  title = remainder.split('.')[0]
-  p title
-
-  # unless names == '––– ' || names == 'Institute for Laboratory Animal Research '
-
-  authors = []
-
-  names = names.split(',').select{ |name| name != ' et al. '}.map{|name| name.gsub(' ', '').gsub('&', '')}
+# File.open('db/animal_consciousness_SEP_biblio.txt').readlines.each do |line|
 
 
-  puts "************"
-  p previous_name
+#   lineAry = line.split('(')
+#   names = lineAry.shift
+#   lineAry = lineAry[0].split(')')
+#   date = lineAry.shift
+#   remainder = lineAry[0]
+#   # p names
+#   p date
 
-  if names[0].split('')[1] == "–"
+#   remainder = remainder.split('').slice(2, 9999).join('')
+#   title = remainder.split('.')[0]
+#   p title
 
-    puts "$$$ what the fuck Akins"
-    p previous_name
+#   # unless names == '––– ' || names == 'Institute for Laboratory Animal Research '
 
-    authors << previous_name
+#   authors = []
 
-  elsif names[0] == 'Institute for Laboratory Animal Research '.gsub(' ', '').gsub('&', '')
-
-    previous_name = {
-      first_name: 'The',
-      last_name: names[0]
-    }
-
-    authors << previous_name.clone
-
-  elsif names.length % 2 == 0
-
-    while names.length > 0
-
-      raise "fucked up number of name segments; names: #{names}" unless names.length % 2 == 0
-
-      last_name = names.shift
-      first_name = names.shift
-
-      previous_name = {
-        first_name: first_name,
-        last_name: last_name
-      }
-      authors << previous_name.clone
-    end
-  end
+#   names = names.split(',').select{ |name| name != ' et al. '}.map{|name| name.gsub(' ', '').gsub('&', '')}
 
 
-  if Publication.where({title: title, date: date}).count > 0
+#   puts "************"
+#   p previous_name
 
-    new_pub = Publication.where({
-      title: title,
-      date: date
-    })[0]
-    p ("found existing pub#{new_pub.title}")
+#   if names[0].split('')[1] == "–"
 
-  else
+#     puts "$$$ what the fuck Akins"
+#     p previous_name
 
-    new_pub = Publication.create({
-      title: title,
-      date: date
-    })
-    p "created new pub#{new_pub.title}"
+#     authors << previous_name
 
-  end
+#   elsif names[0] == 'Institute for Laboratory Animal Research '.gsub(' ', '').gsub('&', '')
 
-  authors.each do |author|
+#     previous_name = {
+#       first_name: 'The',
+#       last_name: names[0]
+#     }
 
-    if Author.where(author).count > 0
-      this_author = Author.where(author)[0]
-    else
-      this_author = Author.create(author)
-    end
+#     authors << previous_name.clone
 
-    unless new_pub.authors.any? {|auth| this_author == auth }
-      new_pub.authors << this_author
-    end
-  end
-end
+#   elsif names.length % 2 == 0
 
+#     while names.length > 0
 
-File.open('db/topic_seeds.txt').readlines.each do |line|
-  lineArr = line.split(' ')
-  if lineArr[0] == '*'
-    lineArr.shift
-    line = lineArr.join(' ')
-    Topic.create({title: line}) unless Topic.where({title: line}).length > 0
-  end
-end
+#       raise "fucked up number of name segments; names: #{names}" unless names.length % 2 == 0
+
+#       last_name = names.shift
+#       first_name = names.shift
+
+#       previous_name = {
+#         first_name: first_name,
+#         last_name: last_name
+#       }
+#       authors << previous_name.clone
+#     end
+#   end
 
 
-# require_relative "publication_seeds"
+#   if Publication.where({title: title, date: date}).count > 0
 
-# def log_pubs pubs
-#   pubs.each do |pub|
-#     if Publication.where({title: pub[:title]}).count > 0
-#       db_pub = Publication.where({title: pub[:title]})[0]
+#     new_pub = Publication.where({
+#       title: title,
+#       date: date
+#     })[0]
+#     p ("found existing pub#{new_pub.title}")
+
+#   else
+
+#     new_pub = Publication.create({
+#       title: title,
+#       date: date
+#     })
+#     p "created new pub#{new_pub.title}"
+
+#   end
+
+#   authors.each do |author|
+
+#     if Author.where(author).count > 0
+#       this_author = Author.where(author)[0]
 #     else
-#       db_pub = Publication.create({
-#         title: pub[:title],
-#         date: pub[:publication_date]
-#       })
+#       this_author = Author.create(author)
 #     end
 
-#     pub[:authors].each do |auth|
-#       this_author = {}
-#       this_author[:name] = auth.split(',')
-#       this_author[:last_name] = this_author[:name][0]
-#       this_author[:first_name] = this_author[:name][1]
-
-#       if db_pub.authors.any?{ |db_auth|
-#         this_author[:first_name] + this_author[:last_name] == db_auth.first_name + db_auth.last_name
-#       }
-#         {message: 'author previously in list'}
-#       elsif Author.any?{ |db_auth|
-#         this_author[:first_name] + this_author[:last_name]  == db_auth.first_name + db_auth.last_name
-#       }
-#         new_author = Author.where({
-#           first_name: this_author[:first_name],
-#           last_name: this_author[:last_name]
-#         })[0]
-#         db_pub.authors << new_author
-#         # new_author.publications << db_pub
-#       else
-#         new_author = Author.create({
-#           first_name: this_author[:first_name],
-#           last_name: this_author[:last_name]
-#         })
-#         db_pub.authors << new_author
-#         # new_author.publications << db_pub
-#       end
+#     unless new_pub.authors.any? {|auth| this_author == auth }
+#       new_pub.authors << this_author
 #     end
 #   end
 # end
 
-# log_pubs $pub_seeds
 
-
-
+# File.open('db/topic_seeds.txt').readlines.each do |line|
+#   lineArr = line.split(' ')
+#   if lineArr[0] == '*'
+#     lineArr.shift
+#     line = lineArr.join(' ')
+#     Topic.create({title: line}) unless Topic.where({title: line}).length > 0
+#   end
+# end
 

@@ -23,7 +23,7 @@ class PublicationsController < ApplicationController
 
     sort_orders = {
       'alpha' => :title,
-      'citations' => :citation_count,
+      'citations' => :title,
       'date' => :date
     }
 
@@ -31,6 +31,10 @@ class PublicationsController < ApplicationController
 
     if query_string == ""
       @publications = Publication.all.order(sort_order)
+      pubs = []
+      @publications.each { |pub| pubs.push pub }
+      @publications = pubs
+      @publications.sort!{|x,y| y.citation_count.to_i <=> x.citation_count.to_i} if params[:sort_order] == 'citations'
     else
       @publications = Publication.where(query_string,
         title_downcase: "%#{params[:title].downcase}%",

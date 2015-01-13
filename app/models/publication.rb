@@ -1,6 +1,6 @@
-# require 'nokogiri'
-# require 'open-uri'
-# require 'debugger'
+require 'nokogiri'
+require 'open-uri'
+require 'debugger'
 
 class Publication < ActiveRecord::Base
 

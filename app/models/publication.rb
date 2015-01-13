@@ -25,14 +25,14 @@ class Publication < ActiveRecord::Base
     end
 
   end
-  def seed_from_txt
+  def self.seed_from_txt
     seed_txt = File.open('db/citation_count_seed.txt', 'r')
       seed_txt.each do |line|
         line = line.gsub("\n", '').split('|')
         Publication.where({title: line[0], date: line[1]})[0].citation_count = line[2]
       end
   end
-  def scrape_scholar_for_citation_count
+  def self.scrape_scholar_for_citation_count
     google_scholar_url = "https://scholar.google.com/scholar?as_q=#{self.title.split(' ').join('+')}&as_epq=&as_oq=&as_eq=&as_occt=any&as_sauthors=&as_publication=&as_ylo=&as_yhi=&btnG=&hl=en&as_sdt=0%2C5"
 
 

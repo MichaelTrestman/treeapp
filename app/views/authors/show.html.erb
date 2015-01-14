@@ -18,22 +18,26 @@
 
 <ul>
   <h2>Publications:</h2>
-  <% @author_pubs.each do |pub| %>
-    <a href="/publications/<%= pub.id %>" class="hover-red">
-      <li>
-        <%= pub.title %> (<%= pub.date %>)
-      </li>
-    </a>
+  <% if @author_pubs %>
+    <% @author_pubs.each do |pub| %>
+      <a href="/publications/<%= pub.id %>" class="hover-red">
+        <li>
+          <%= pub.title %> (<%= pub.date %>)
+        </li>
+      </a>
+    <% end %>
   <% end %>
 </ul>
 <ul>
   <h2>Co-authors:</h2>
-  <% @author_coauths.each do |coauth| %>
-    <a href="/authors/<%= coauth.id %>" class="hover-red">
-      <li>
-        <%= coauth.first_name %> (<%= coauth.last_name %>)
-      </li>
-    </a>
+  <% if @author_coauths %>
+    <% @author_coauths.each do |coauth| %>
+      <a href="/authors/<%= coauth.id %>" class="hover-red">
+        <li>
+          <%= coauth.first_name %> (<%= coauth.last_name %>)
+        </li>
+      </a>
+    <% end %>
   <% end %>
 </ul>
 <% if session[:contributor_id] %>

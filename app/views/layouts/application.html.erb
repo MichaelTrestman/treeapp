@@ -34,6 +34,7 @@
       // $('ul').css('background-color', randomDarkColor());
       $('table').css('background-color', randomDarkColor());
       $('.panel').css('background-color', randomDarkColor());
+
       $('*').css('color', 'rgb(220, 220, 200)')
     })
 
@@ -48,6 +49,13 @@
       $('.panel').css('background-color', randomLightColor());
       // $('*').css('color', 'black')
       // $('.jumbotron').css('background-color', randomLightColor());
+      $('stripey li:nth-child(2n)').css('background-color', randomDarkColor());
+
+      $('stripey li:nth-child(2n) a ').css('color', randomLightColor());
+
+      $('tr:nth-child(2n)').css('background-color', randomDarkColor());
+
+      $('tr:nth-child(2n) a ').css('color', randomLightColor());
     }
     randomizeColorsLight();
     $('#colorChangerLight').click(function(){

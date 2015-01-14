@@ -4,6 +4,33 @@
 * {
   font-family: 'Libre Baskerville', serif;
 }
+.rad-br1 {
+  background-image: url(<%= asset_path 'tody.jpg' %>);
+}
+
+.rad-br2 {
+  background-image: url(<%= asset_path 'bears.jpg' %>);
+}
+
+.fixed-br {
+  background-attachment: fixed;
+}
+.transp-ex-hover {
+  opacity: 0.5;
+  transition-duration: 1s;
+}
+.transp-ex-hover:hover {
+  opacity: 0.9;
+}
+
+
+
+.transl-br {
+  background-color: rgba(200, 200, 200, 0.3);
+}
+.overflow {
+  scroll: overflow;
+}
 body, html {
   width: 100%;
   height: 100%;
@@ -21,14 +48,17 @@ body, html {
 .display-block {
   display: block;
 }
-.blue-br {
-  background-color: blue;
+.black-br {
+  background-color: rgba(10, 100, 10, 0.2);
 }
 .fixed {
   position: fixed;
 }
 .top {
   top: 0%;
+}
+.bottom {
+  bottom: 0%;
 }
 .height10{
   height: 10%;
@@ -41,8 +71,12 @@ body, html {
 .bordered {
   border: solid 1px black;
 }
-.hover-red:hover {
+.hover-chill:hover {
   color: red;
+  background-color: green;
+}
+.right: {
+  left: 10%;
 }
 .float-left {
   float: left;

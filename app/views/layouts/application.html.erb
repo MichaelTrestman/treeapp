@@ -7,9 +7,52 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class=''>
+  <div class='btn btn-default btn-sm' id ='colorChangerLight'>randomize color scheme</div >
+  <!-- <button id ='colorChangerDark'>random dark color scheme</button> -->
+
   <%= render 'layouts/header'  %>
   <%= yield %>
 
+  <SCRIpT TYPE="text/javascript">
+//    var imageUrl ="http://commons.wikimedia.org/wiki/File:Rana_temporaria_in_nature_park_Trho%C5%88_in_2014_(2).jpg#mediaviewer/File:Rana_temporaria_in_nature_park_Trho%C5%88_in_2014_(2).jpg"
+  //  imageUrl = 'images/bears.jpg'
+
+    //$('body').css('background-image', imageUrl)
+
+    function randomLightColor(){
+      return "rgba(" + (Math.floor(Math.random()*10) + 180).toString() + ',' + (Math.floor(Math.random()*10) + 180).toString() + ',' + (Math.floor(Math.random()*10) + 180).toString() + ',0.7)'
+    }
+    function randomDarkColor () {
+      return "rgba(" + (Math.floor(Math.random()*10) + 0).toString() + ',' + (Math.floor(Math.random()*10) + 0).toString() + ',' + (Math.floor(Math.random()*10) + 0).toString() + ',0.6)'
+    }
+    $('#colorChangerDark').click(function(){
+
+      $('body').removeClass('black-br')
+      console.log(randomDarkColor())
+      $('body').css('background-color', randomDarkColor());
+      // $('ul').css('background-color', randomDarkColor());
+      $('table').css('background-color', randomDarkColor());
+      $('.panel').css('background-color', randomDarkColor());
+      $('*').css('color', 'rgb(220, 220, 200)')
+    })
+
+
+
+    var randomizeColorsLight = function(){
+      $('body').removeClass('black-br')
+      console.log(randomLightColor())
+      $('body').css('background-color', randomDarkColor());
+      // $('ul').css('background-color', randomLightColor());
+      $('table').css('background-color', randomLightColor());
+      $('.panel').css('background-color', randomLightColor());
+      // $('*').css('color', 'black')
+      // $('.jumbotron').css('background-color', randomLightColor());
+    }
+    randomizeColorsLight();
+    $('#colorChangerLight').click(function(){
+      randomizeColorsLight();
+    })
+  </SCRIPT>
 </body>
 </html>

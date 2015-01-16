@@ -1,7 +1,17 @@
 
 <div class='panel panel-header '>
-  <div class=''><h1>EvolutionaryTreeOfMind.org</h1></div>
-  <div class='container-fluid'>
+  <div class='row'>
+    <h1 class='margin-1 col-sm-5 '>EvolutionaryTreeOfMind.org</h1>
+
+    <div class='col-sm-2 pull-right'>
+      <% if session[:contributor_id]  %>
+        <p class=''><h3><a href='/logout'>logout <%= session[:contributor_name] %></a></h3></p>
+      <% else %>
+        <p class=''><h4><a href='/loginz'>contributor login</a></h4></p>
+      <% end %>
+    </div>
+  </div>
+
     <ul class='container-fluid'>
       <li class='  navbar-nav nav pull-left padding-10'><h3><a href='/'>welcome</a></h3></li>
 
@@ -9,12 +19,10 @@
       <li class='  navbar-nav nav pull-left padding-10'><h3><a href='/authors'>authors</a></h3></li>
       <li class='  navbar-nav nav pull-left padding-10'><h3><a href='/topics'>topics</a></h3></li>
       <li class='  navbar-nav nav pull-left padding-10'><h3><a href='/viz'>visualizations</a></h3></li>
+      <li class='  navbar-nav nav pull-left padding-10'><h3>
+        <%= mail_to "michaeltrestman@evolutionarytreeofmind.org", "contact" %>
+      </h3></li>
 
-      <% if session[:contributor_id]  %>
-        <li class='  navbar-nav nav pull-right padding-10'><h3><a href='/logout'>logout <%= session[:contributor_name] %></a></h3></li>
-      <% else %>
-        <li class='  navbar-nav nav pull-right'><h4><a href='/loginz'>contributor login</a></h4></li>
-      <% end %>
     </ul>
   </div>
 </div>

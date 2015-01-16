@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   get 'logout' => 'sessions#logout'
   get 'loginz' => 'sessions#loginz'
+  get 'viz' => 'visualizations#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

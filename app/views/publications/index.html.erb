@@ -21,10 +21,11 @@
           <%= radio_button_tag 'sort_order', 'date' %>
           date
         </li>
+
         <SCRIPT TYPE="text/javascript">
           var sort_order_setting = '<%=j params[:sort_order] || "" %>';
           console.log(sort_order_setting)
-          $('#' + sort_order_setting ).attr('checked', 'checked')
+          $('#sort_order_' + sort_order_setting ).attr('checked', 'checked')
         </SCRIPT>
       </ul>
 

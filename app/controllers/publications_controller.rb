@@ -4,8 +4,9 @@ class PublicationsController < ApplicationController
 
   # GET /publications
   # GET /publications.json
+
   def index
-    @publications = Publication.complex_search( params[:search_params]||{}, params[:search_order] )
+    @publications = Publication.complex_search( params[:search_params]||{}, params[:sort_order] )
   end
 
   # GET /publications/1

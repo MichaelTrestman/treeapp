@@ -5,59 +5,7 @@ class PublicationsController < ApplicationController
   # GET /publications
   # GET /publications.json
   def index
-    query_string = ""
-    if params[:title] && params[:title] != ""
-        query_string += '
-        (title LIKE :title_downcase
-        OR
-        title LIKE :title_capitalize
-        OR
-        title LIKE :title_upcase)
-        '
-    end
-
-    if params[:date] && params[:date] != ""
-      query_string += "AND " if query_string != ""
-      query_string += 'date LIKE :pub_date'
-    end
-
-    sort_orders = {
-      'alpha' => :title,
-      'citations' => :title,
-      'date' => :date
-    }
-
-    sort_order = sort_orders[params[:sort_order]] ||= :title
-
-    if query_string == ""
-      @publications = Publication.all.order(sort_order)
-      pubs = []
-      @publications.each { |pub| pubs.push pub }
-      @publications = pubs
-      @publications.sort!{|x,y| y.citation_count.to_i <=> x.citation_count.to_i} if params[:sort_order] == 'citations'
-    else
-      @publications = Publication.where(query_string,
-        title_downcase: "%#{params[:title].downcase}%",
-        title_capitalize: "%#{params[:title].capitalize}%",
-        title_upcase: "%#{params[:title].upcase}%",
-        pub_date: "%#{params[:date]}%"
-      ).order(sort_order)
-    end
-
-
-    if params[:author] && params[:author] != ""
-      author_queries = params[:author].split(' ')
-      author_queries.each do |query|
-        @publications = @publications
-          .select{ |pub|
-            pub.authors.any? { |auth|
-              # auth.first_name == query.capitalize
-
-              auth.last_name == query.capitalize
-            }
-          }
-      end
-    end
+    @publications = Publication.complex_search( params[:search_params]||{}, params[:search_order] )
   end
 
   # GET /publications/1

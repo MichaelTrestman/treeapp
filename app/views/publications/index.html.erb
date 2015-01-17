@@ -1,39 +1,52 @@
 
 <h1 class=' panel font-libre'>Publications</h1>
 <div class=' panel clear-left margin-1'>
-  <form class=' '>
-    <div class=' panel panel-header'>
+  <%= form_tag('/publications', method: :get) do %>
+    <div class='panel panel-header'>
       <h3>Sort by:</h3>
       <ul class='display-flex-row'>
-          <li class='no-list-styles '><input type="radio" name="sort_order" value="alpha" <%= "checked" if params[:sort_order] == 'alpha' %>>alpha</li>
-          <li class='no-list-styles '><input type="radio" name="sort_order" value="citations" <%= "checked" if params[:sort_order] == 'citations' %>>citations</li>
-          <li class='no-list-styles '><input type="radio" name="sort_order" value="date" <%= "checked" if params[:sort_order] == 'date' %>>date</li>
-      </ul>
-    </div>
+        <li class='no-list-styles margin-1'>
+          <%= radio_button_tag 'sort_order', 'alpha' %>
+          alphabetical
 
-    <div class=' panel panel-body'>
-      <h3 class='clear-left'>Filter results:</h3>
+        </li>
+
+        <li class='no-list-styles margin-1'>
+          <%= radio_button_tag 'sort_order', 'citations' %>
+          citations count
+
+        </li>
+
+        <li class='no-list-styles margin-1'>
+          <%= radio_button_tag 'sort_order', 'date' %>
+          date
+        </li>
+        <SCRIPT TYPE="text/javascript">
+          var sort_order_setting = '<%=j params[:sort_order] || "" %>';
+          console.log(sort_order_setting)
+          $('#' + sort_order_setting ).attr('checked', 'checked')
+        </SCRIPT>
+      </ul>
+
       <ul class='display-flex-row'>
-        <li class='float-left no-clear margin-1 no-list-styles'>Title includes words:
-          <input type='text' name='title' value= "<%=params[:title]  %>" ><br>
-        </li>
+        <%= fields_for :search_params do |sp| %>
+        <% params[:search_params] = params[:search_params] || {} %>
 
-        <li class='float-left no-clear margin-1 no-list-styles'>Authors includes words:
-          <input type='text' name='author' value= "<%=params[:author]  %>"><br>
-        </li>
-
-        <li class='float-left no-clear margin-1 no-list-styles'>publication year:
-          <input type='text' name='date' value= "<%=params[:date]  %>"><br>
-        </li>
-
-        <li class='float-left no-clear margin-1 no-list-styles'>Topics:
-          <input type='text' name='topics' value= "<%=params[:topics]  %>"><br>
-        </li>
+          <li class='no-list-styles margin-1'>
+            title: <%= sp.text_field :title, :value => params[:search_params][:title] %>
+            author: <%= sp.text_field :author, :value => params[:search_params][:author] %>
+            date: <%= sp.text_field :date, :value => params[:search_params][:date] %>
+            topic: <%= sp.text_field :topic, :value => params[:search_params][:topic] %>
+            <%= sp.submit "submito" %>
+          </li>
+        <% end %>
       </ul>
-      <input type="submit" value="Submit">
-    </div>
-  </form>
 
+    </div>
+
+  <% end %>
+
+  <!--  -->
   <div class="overflow">
     <table class="table ">
       <thead>
@@ -58,55 +71,7 @@
       </tbody>
     </table>
   </div>
-  <ul class='display-flex-row'>
-    <li class='float-left no-clear margin-1 no-list-styles'>Title includes words:
-      <input type='text' name='title' value= "<%=params[:title]  %>" ><br>
-    </li>
 
-    <li class='float-left no-clear margin-1 no-list-styles'>Authors includes words:
-      <input type='text' name='author' value= "<%=params[:author]  %>"><br>
-    </li>
-
-    <li class='float-left no-clear margin-1 no-list-styles'>publication year:
-      <input type='text' name='date' value= "<%=params[:date]  %>"><br>
-    </li>
-
-    <li class='float-left no-clear margin-1 no-list-styles'>Topics:
-      <input type='text' name='topics' value= "<%=params[:topics]  %>"><br>
-    </li>
-
-  </ul>
-  <input type="submit" value="Submit">
-</form>
-
-</div>
-
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Date</th>
-      <th>Citation count</th>
-      <th>First Author</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-
-  <tbody>
-    <% @publications.each do |publication| %>
-      <tr>
-        <td><%= link_to publication.title, publication %></td>
-        <td><%= publication.date %></td>
-        <td><%= publication.citation_count ? publication.citation_count : 'unknown' %></td>
-        <td> <%= publication.authors[0].last_name if publication.authors.length > 0 %> </td>
-
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
 
 <%= link_to 'New Publication', new_publication_path %>
 

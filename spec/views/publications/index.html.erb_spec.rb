@@ -4,19 +4,22 @@ RSpec.describe "publications/index", :type => :view do
   before(:each) do
     assign(:publications, [
       Publication.create!(
-        :title => "Title",
-        :date => "Date"
+        :title => "Title1",
+        :date => "Date1"
       ),
       Publication.create!(
-        :title => "Title",
-        :date => "Date"
+        :title => "Title2",
+        :date => "Date2"
       )
     ])
   end
 
   it "renders a list of publications" do
     render
-    assert_select "tr>td", :text => "Title".to_s, :count => 2
-    assert_select "tr>td", :text => "Date".to_s, :count => 2
+    expect(rendered).to match(/Title1/)
+    expect(rendered).to match(/Title2/)
+    expect(rendered).to match(/Date1/)
+    expect(rendered).to match(/Date2/)
+
   end
 end

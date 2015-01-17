@@ -1,3 +1,4 @@
+
 class HerokuCitationSeeder
   def initialize
     @publications = Publication.all

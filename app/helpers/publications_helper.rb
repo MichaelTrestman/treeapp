@@ -1,7 +1,6 @@
 module PublicationsHelper
 
   def complex_search(filters_hash={}, sort_order=nil)
-    direction = :asc
     search_object = self
     puts "^^^^^^^^^^^^^^^^^^"
     p filters_hash
@@ -13,7 +12,8 @@ module PublicationsHelper
     where_terms = {
         title_downcase: "%#{ filters_hash[:title] || ''}%",
         author_lastname: "%#{ filters_hash[:author] || ""}%",
-        pub_date: "%#{ filters_hash[:date] ? filters_hash[:date]: '' }%"
+        date_start: filters_hash[:date_start].to_i  || '',
+        date_end: filters_hash[:date_end].to_i || ""
       }
 
     if filters_hash[:title] && filters_hash[:title] != ""
@@ -23,13 +23,17 @@ module PublicationsHelper
       where_filters += "
         (title ILIKE :title_downcase)
       "
+
     end
 
-    if filters_hash[:date] && filters_hash[:date] != ""
+    if filters_hash[:date_start] && filters_hash[:date_start] != ""
       where_filters += " AND " unless where_filters.length == 0
-      where_filters += "
-      (date LIKE :pub_date)
-      "
+      where_filters += "(year >= :date_start)"
+    end
+
+    if filters_hash[:date_end] && filters_hash[:date_end] != ""
+      where_filters += " AND " unless where_filters.length == 0
+      where_filters += "(year <= :date_end)"
     end
 
     if filters_hash[:author] && filters_hash[:author] != ''

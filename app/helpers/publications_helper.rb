@@ -1,6 +1,7 @@
 module PublicationsHelper
 
   def complex_search(filters_hash={}, sort_order=nil)
+    direction = :asc
     search_object = self
     puts "^^^^^^^^^^^^^^^^^^"
     p filters_hash
@@ -44,20 +45,19 @@ module PublicationsHelper
 
     p "lllllllllllllll"
     p sort_order
-    results = search_object.where(where_filters, where_terms).order(sort_order).reverse
-    # p 'results length:'
-    # p results.count
-    # puts "resultsresultsresultsresultsresultsresultsresultsresultsresultsresultsresultsresults"
-    # p results
-    results
+
+    search_object.where(where_filters, where_terms).order(sort_order)
   end
 
   def set_sort_order order
 
    sort_orders = {
-    'alpha' => :title,
-    'citations' => :citation_count,
-    'date' => :date
+    'alpha' => {:title => :asc},
+    'alpha-desc' => {:title => :desc},
+    'citations' => {:citation_count => :asc},
+    'citations-desc' => {:citation_count => :desc},
+    'date' => {:date => :asc},
+    'date-desc' => {:date => :desc}
     }
 
     sort_orders[order] || :title

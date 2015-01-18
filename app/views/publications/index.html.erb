@@ -2,49 +2,67 @@
 <h1 class=' panel font-libre'>Publications</h1>
 <div class=' panel clear-left margin-1'>
   <%= form_tag('/publications', method: :get) do %>
-    <div class='panel panel-header'>
-      <h3>Sort by:</h3>
-      <ul class='display-flex-row'>
-        <li class='no-list-styles margin-1'>
-          <%= radio_button_tag 'sort_order', 'alpha' %>
-          alphabetical
+    <div class=' float-left clear-none '>
+      <h3 class=''>Sort</h3>
+      <ul class=''>
+        <div class=''>
+          <h4 class='font-libre'>alphabetical</h4>
+          <li class='no-list-styles margin-1'>
+            <%= radio_button_tag 'sort_order', 'alpha' %>
+            up
 
-        </li>
+          </li>
+          <li class='no-list-styles margin-1'>
+            <%= radio_button_tag 'sort_order', 'alpha-desc' %>
+            down
 
-        <li class='no-list-styles margin-1'>
-          <%= radio_button_tag 'sort_order', 'citations' %>
-          citations count
+          </li>
+        </div>
 
-        </li>
+        <div class=''>
+          <h4 class='font-libre'>citations count</h4>
+          <li class='no-list-styles margin-1'>
+            <%= radio_button_tag 'sort_order', 'citations' %>
+            up
+          </li>
+          <li class='no-list-styles margin-1'>
+            <%= radio_button_tag 'sort_order', 'citations-desc' %>
+            down
 
-        <li class='no-list-styles margin-1'>
-          <%= radio_button_tag 'sort_order', 'date' %>
-          date
-        </li>
+          </li>
 
+        </div>
+        <div class=''>
+          <h4 class='font-libre'>date</h4>
+          <li class='no-list-styles margin-1'>
+            <%= radio_button_tag 'sort_order', 'date' %>up
+          </li>
+          <li class='no-list-styles margin-1'>
+            <%= radio_button_tag 'sort_order', 'date-desc' %>down
+          </li>
+
+        </div>
         <SCRIPT TYPE="text/javascript">
           var sort_order_setting = '<%=j params[:sort_order] || "" %>';
           console.log(sort_order_setting)
           $('#sort_order_' + sort_order_setting ).attr('checked', 'checked')
         </SCRIPT>
       </ul>
-
-      <ul class='display-flex-row'>
-        <%= fields_for :search_params do |sp| %>
-        <% params[:search_params] = params[:search_params] || {} %>
-
-          <li class='no-list-styles margin-1'>
-            title: <%= sp.text_field :title, :value => params[:search_params][:title] %>
-            author: <%= sp.text_field :author, :value => params[:search_params][:author] %>
-            date: <%= sp.text_field :date, :value => params[:search_params][:date] %>
-            topic: <%= sp.text_field :topic, :value => params[:search_params][:topic] %>
-            <%= sp.submit "submito" %>
-          </li>
-        <% end %>
-      </ul>
-
     </div>
 
+    <div class=' float-left clear-none margin-1'>
+      <%= fields_for :search_params do |sp| %>
+      <% params[:search_params] = params[:search_params] || {} %>
+        <div class='no-list-styles margin-1 float-left'>
+          <h3>Search Filters</h3>
+          title: <%= sp.text_field :title, :value => params[:search_params][:title] %>
+          author: <%= sp.text_field :author, :value => params[:search_params][:author] %>
+          date: <%= sp.text_field :date, :value => params[:search_params][:date] %>
+          topic: <%= sp.text_field :topic, :value => params[:search_params][:topic] %>
+          <%= sp.submit "submit" %>
+        </div>
+      <% end %>
+    </div>
   <% end %>
 
   <!--  -->

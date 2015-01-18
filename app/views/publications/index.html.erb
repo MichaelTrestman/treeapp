@@ -57,7 +57,13 @@
           <h3>Search Filters</h3>
           title: <%= sp.text_field :title, :value => params[:search_params][:title] %>
           author: <%= sp.text_field :author, :value => params[:search_params][:author] %>
-          date: <%= sp.text_field :date, :value => params[:search_params][:date] %>
+
+          date start: <%= sp.text_field :date_start, :value => params[:search_params][:date_start] %>
+
+          date end: <%= sp.text_field :date_end, :value => params[:search_params][:date_end] %>
+          <script type="text/javascript">
+
+          </script>
           topic: <%= sp.text_field :topic, :value => params[:search_params][:topic] %>
           <%= sp.submit "submit" %>
         </div>

@@ -1,6 +1,6 @@
 module PublicationsHelper
 
-  def complex_search(filters_hash={}, sort_order=nil)
+  def complex_search(filters_hash={}, sort_order='alpha')
     search_object = self
     puts "^^^^^^^^^^^^^^^^^^"
     p filters_hash

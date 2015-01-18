@@ -12,7 +12,7 @@ RSpec.describe "SearchHelper", :type => :helper do
     authbob = Author.create({first_name: 'Bob', last_name: 'McBob'})
 
     100.times do
-      pub = Publication.create({title: Faker::Lorem.word, citation_count: rand(1000), date: ( rand(30) + 1985 ).to_s})
+      pub = Publication.create({title: Faker::Lorem.word, citation_count: rand(1000), year: ( rand(30) + 1985 ).to_s})
       rand(3).times do
         if rand(10) > 5
           auth = Author.create({first_name: Faker::Lorem.word, last_name: Faker::Lorem.word})
@@ -52,14 +52,14 @@ RSpec.describe "SearchHelper", :type => :helper do
     end
 
     it "filters dates of publications" do
-      this_pubbers = Publication.complex_search({:date => '1990'})
+      this_pubbers = Publication.complex_search({:date_start => 1990})
       p this_pubbers
-      10.times do
-        expect(this_pubbers.sample.date).to eq '1990'
+      20.times do
+        expect(this_pubbers.sample.year >= 1990).to be true
       end
-      this_pubbers = Publication.complex_search({:date => '2001'})
-      10.times do
-        expect(this_pubbers.sample.date).to eq '2001'
+      this_pubbers = Publication.complex_search({:date_end => '2001'})
+      20.times do
+        expect(this_pubbers.sample.year <= 2001).to be true
       end
     end
 
@@ -82,7 +82,7 @@ RSpec.describe "SearchHelper", :type => :helper do
     end
 
     it "sorts by citation count" do
-      this_pubbers = Publication.complex_search({}, 'citations')
+      this_pubbers = Publication.complex_search({}, 'citations-desc')
       20.times do
         i = rand(this_pubbers.count - 1 )
         expect(this_pubbers[i].citation_count >= this_pubbers[i+1].citation_count ).to be true

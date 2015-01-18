@@ -2,10 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "publications/show", :type => :view do
   before(:each) do
-    @publication = Publication.create!(
+    @publication = Publication.create(
       :title => "Title",
-      :date => "Date"
+      :year => 666
     )
+    @publication.authors << Author.create({last_name: 'mcbob'})
+    @authors = @publication.authors
   end
 
   it "renders attributes in <p>" do

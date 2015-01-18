@@ -10,15 +10,12 @@
           <li class='no-list-styles margin-1'>
             <%= radio_button_tag 'sort_order', 'alpha' %>
             up
-
           </li>
           <li class='no-list-styles margin-1'>
             <%= radio_button_tag 'sort_order', 'alpha-desc' %>
             down
-
           </li>
         </div>
-
         <div class=''>
           <h4 class='font-libre'>citations count</h4>
           <li class='no-list-styles margin-1'>
@@ -28,9 +25,7 @@
           <li class='no-list-styles margin-1'>
             <%= radio_button_tag 'sort_order', 'citations-desc' %>
             down
-
           </li>
-
         </div>
         <div class=''>
           <h4 class='font-libre'>date</h4>
@@ -40,7 +35,6 @@
           <li class='no-list-styles margin-1'>
             <%= radio_button_tag 'sort_order', 'date-desc' %>down
           </li>
-
         </div>
         <SCRIPT TYPE="text/javascript">
           var sort_order_setting = '<%=j params[:sort_order] || "" %>';
@@ -89,8 +83,9 @@
             <td><%= link_to publication.title, publication %></td>
             <td><%= publication.date %></td>
             <td><%= publication.citation_count ? publication.citation_count : 'unknown' %></td>
+            <% if publication.authors[0] %>
             <td> <%= publication.authors[0].last_name %> </td>
-
+            <% end %>
           </tr>
         <% end %>
       </tbody>

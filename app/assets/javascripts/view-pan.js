@@ -5,7 +5,8 @@ var upArrow    = 38;
 var rightArrow = 39;
 var downArrow  = 40;
 var panRate    = 10;  // Number of pixels to pan per key press.
-var zoomIn = 221;
+var zoomIn = 187;
+var zoomOut = 189;
 var viewbox;
 /* Global variables: */
 // var theSvgElement = document.getElementsByClass('svg-canvas')[0];
@@ -25,12 +26,8 @@ function processKeyPress(evt)
 
   viewbox = theSvgElement.getAttribute('viewBox');  // Grab the object representing the SVG element's
 
-  var viewBoxValues = viewbox.split(' ');       // Create an array and insert each individual view box attribute value (assume they're seperated by a single whitespace character).
 
-  /* The array is filled with strings, convert the first two viewBox values to floats: */
-  viewBoxValues[0] = parseFloat(viewBoxValues[0]);  // Represent the x-coordinate on the viewBox attribute.
-  viewBoxValues[1] = parseFloat(viewBoxValues[1]);  // Represent the y coordinate on the viewBox attribute.
-
+  var viewBoxValues = viewbox.split(' ').map(function(val){ return parseFloat(val); })
 
   switch (evt.keyCode)
   {
@@ -52,12 +49,18 @@ function processKeyPress(evt)
       break;
     case zoomIn:
       evt.preventDefault();
-      viewBoxValues[2] += 0.1;
-      viewBoxValues[3] += 0.1;
+      viewBoxValues[2] -= 10;
+      // viewBoxValues[3] += 1;
+      break;
+    case zoomOut:
+      evt.preventDefault();
+      viewBoxValues[2] += 10;
+      // viewBoxValues[3] -= 1;
       break;
   } // switch
 
-  theSvgElement.setAttribute('viewBox', viewBoxValues.join(' ')); // Convert the viewBoxValues array into a string with a white space character between the given values.
+  theSvgElement.setAttribute('viewBox', viewBoxValues.join(' '));
+
 }
 
 

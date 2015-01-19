@@ -6,6 +6,5 @@ class Topic < ActiveRecord::Base
     Publication.where("
         title ILIKE :title
       ", :title => "%#{self.title}%")
-
   end
 end

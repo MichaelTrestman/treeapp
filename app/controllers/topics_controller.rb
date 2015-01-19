@@ -4,12 +4,19 @@ class TopicsController < ApplicationController
   # GET /topics
   # GET /topics.json
   def index
-    @topics = Topic.all
+    @topics = Topic.all.sort_by { |e| e.publications.count }.reverse
   end
 
   # GET /topics/1
   # GET /topics/1.json
   def show
+    @publications = @topic.publications
+    @authors = []
+    @publications.each do |pub|
+      pub.authors.each do |auth|
+        @authors << auth unless @authors.any? { |a| a == auth }
+      end
+    end
   end
 
   # GET /topics/new

@@ -13,6 +13,7 @@ class PublicationsController < ApplicationController
   # GET /publications/1.json
   def show
     @authors = @publication.authors || []
+    @topics = @publication.topics || []
   end
 
   # GET /publications/new

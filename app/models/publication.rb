@@ -14,8 +14,8 @@ class Publication < ActiveRecord::Base
 
   # has_many :distributions
   # has_many :taxons, through: :distributions
-  # has_many :tags
-  # has_many :topics, through: :tags
+  has_many :tags
+  has_many :topics, through: :tags
   def self.scrape_in_a_few_citations n=1
     n.times do
       pub = Publication.where({citation_count: nil}).sample

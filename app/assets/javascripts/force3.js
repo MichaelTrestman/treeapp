@@ -8,7 +8,7 @@ var colors = {
 }
 
 canvas = d3.select('#svg-panel').append('svg')
-      .attr('class', 'svg-canvas');
+      .attr('class', 'svg-canvas').attr('viewBox', '-40 0 1000 600');
 
 
 width =  $('svg').width()

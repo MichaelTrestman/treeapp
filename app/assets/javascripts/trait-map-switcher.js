@@ -19,6 +19,8 @@ Object.keys(OriginHypotheses).forEach(function(origHyp){
     DiscreteTraitDistribution.mapTraits({"conscious": null}, ['Animals'])
     DiscreteTraitDistribution.mapTraits({"conscious": 'dolphinately'}, OriginHypotheses[origHyp])
     styleDat();
+    $('#hyp-list li div').css('color', 'black')
+    $(this).css('color', 'gold')
   })
 
 })

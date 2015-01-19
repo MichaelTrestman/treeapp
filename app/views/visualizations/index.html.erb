@@ -3,13 +3,13 @@
   <div class='row panel'>
     <div id='sidebar' class='col-sm-2 bordered'>
       <p>Click to highlight a group of animals.<br> The following are the groups proposed by various scientists to be exclusively conscious. See <a href='http://plato.stanford.edu/entries/consciousness-animal/#evolution'>Stanford Encyclopedia article</a></p>
-      <ul>
-          <li><div class='button' id='humans'>Humans</div></li>
-          <li><div class='button' id='greatApes'>Apes</div></li>
-          <li><div class='button' id='mammals'>Mammals</div></li>
-          <li><div class='button' id='amniotes'>Amniotes</div></li>
-          <li><div class='button' id='bigThree'>Big-Three</div></li>
-          <li><div class='button' id='animals'>Animals</div></li>
+      <ul id='hyp-list' class='no-list-styles'>
+          <li><div class='bordered' id='humans'>Humans</div></li>
+          <li><div class='bordered' id='greatApes'>Apes</div></li>
+          <li><div class='bordered' id='mammals'>Mammals</div></li>
+          <li><div class='bordered' id='amniotes'>Amniotes</div></li>
+          <li><div class='bordered' id='bigThree'>Big-Three</div></li>
+          <li><div class='bordered' id='animals'>Animals</div></li>
       </ul>
     <div id='info-panel' class='panel '>
 
@@ -28,6 +28,7 @@
 <%= javascript_include_tag 'force3.js', 'data-turbolinks-track' => true %>
 
 <%= javascript_include_tag 'trait-map-switcher.js', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'view-pan.js', 'data-turbolinks-track' => true %>
 
 
 

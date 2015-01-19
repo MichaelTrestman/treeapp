@@ -37,7 +37,7 @@
           <tr class=''>
 
             <td><%= link_to topic.title, topic %></td>
-            <td><%= link_to (rand(100) + 10).to_s, topic %></td>
+            <td><%= topic.publications.count %></td>
 
 
           </tr>

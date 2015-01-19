@@ -18,7 +18,8 @@ class HerokuCitationSeeder
       seed_txt.each do |line|
         line = line.gsub("\n", '').split('|')
         pub = Publication.where({title: line[0], date: line[1]})[0]
-        raise 'shit title thing aint right' unless pub
+
+        raise "shit title thing aint right for #{ line }" unless pub
         raise 'citation count not integer' unless line[2].to_i.class == Fixnum
         pub.citation_count = line[2].to_i
         pub.save

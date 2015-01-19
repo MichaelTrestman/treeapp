@@ -8,5 +8,5 @@ Rails.application.config.assets.version = '1.0'
 # Rails.application.config.assets.precompile += %w( search.js )
 
 Rails.application.config.assets.precompile += %w( d3.v3.js )
-Rails.application.config.assets.precompile += %w( treeData.js trait-mapping.js force3.js trait-map-switcher.js)
+Rails.application.config.assets.precompile += %w( treeData.js trait-mapping.js force3.js trait-map-switcher.js view-pan.js)
 

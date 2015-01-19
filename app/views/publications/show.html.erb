@@ -35,10 +35,10 @@
   <div class='panel col-md-6'>
     <h2>Topics</h2>
     <ul class="" >
-      <% @authors.each do |auth| %>
-        <a href='/authors/<%= auth.id %>'>
+      <% @topics.each do |topic| %>
+        <a href='/topics/<%= topic.id %>'>
           <li class='hover-red'>
-            <%= auth.first_name %> <%= auth.last_name %>
+            <%= topic.title %>
           </li>
         </a>
       <% end %>

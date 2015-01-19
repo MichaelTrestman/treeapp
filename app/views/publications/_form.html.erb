@@ -19,6 +19,11 @@
     <%= f.label :date %><br>
     <%= f.text_field :date %>
   </div>
+  <div class='field' id='abstract-field'>
+    <%= f.label :abstract %>
+    <%= f.text_area :abstract, rows: 10, cols: 45 %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

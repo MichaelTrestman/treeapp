@@ -1,9 +1,28 @@
+
 <p id="notice"><%= notice %></p>
 
 <p>
+
   <strong>Title:</strong>
   <%= @topic.title %>
 </p>
+<div class='row'>
+  <div class='panel col-md-12'>
+    <h2>Publications:</h2>
+    <ul class='col-md-4 no-list-styles stripey'>
+      <% @publications.each do |pub| %>
+          <li class='hover-red'>
+            <a href='/publications/<%= pub.id %>'>
+              <%= pub.title %> | <%= pub.date %>| <%= pub.authors[0].last_name %>
+            </a>
+          </li>
+          <br>
+      <% end %>
+
+    </ul>
+  </div>
+
+
 <% if session[:contributor_id] %>
   <%= link_to 'Edit', edit_topic_path(@topic) %> |
   <%= link_to 'Back', topics_path %>

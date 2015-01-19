@@ -14,7 +14,6 @@ module TopicsHelper
     }
 
 
-
   end
   def set_sort_order order
 

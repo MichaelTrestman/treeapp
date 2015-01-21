@@ -3,11 +3,18 @@
 
 things to do:
 
+  fix complex_search which is breaking shit with its slowness
+
+  contributor welcome page where you are prompted to edit a random page that is missing content, prioritized by linkage density? (e.g. topics with more tags)
+
   improve, modularize css;
 
   model: taxa
     tree-json generator
     improve visualization
+    scrape in relevance from abstract and body like topics
+    show page with list of articles, image and video galleries
+
   model: distribution-hypotheses
     link to publications
     tree-json generator

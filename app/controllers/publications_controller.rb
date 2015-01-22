@@ -1,3 +1,4 @@
+
 class PublicationsController < ApplicationController
   before_action :set_publication, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:edit, :update, :destroy]
@@ -7,6 +8,7 @@ class PublicationsController < ApplicationController
 
   def index
     @publications = Publication.complex_search( params[:search_params]||{}, params[:sort_order] )
+
   end
 
   # GET /publications/1

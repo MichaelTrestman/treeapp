@@ -1,4 +1,5 @@
 class Tag < ActiveRecord::Base
+  extend TagsHelper
   belongs_to :topic, foreign_key: 'topic_id'
   belongs_to :publication, foreign_key: 'publication_id'
 

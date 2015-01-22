@@ -1,70 +1,66 @@
 module PublicationsHelper
+  def complex_searchx(filters_hash={}, sort_order='alpha')
+    Publication.includes(:authors)
+  end
 
   def complex_search(filters_hash={}, sort_order='alpha')
-    search_object = self
-    puts "^^^^^^^^^^^^^^^^^^"
-    p filters_hash
-    p sort_order
-    sort_order = set_sort_order(sort_order)
 
-    where_filters = ""
-
-    where_terms = {
-        title_downcase: "%#{ filters_hash[:title] || ''}%",
-        author_lastname: "%#{ filters_hash[:author] || ""}%",
-        date_start: filters_hash[:date_start].to_i  || '',
-        date_end: filters_hash[:date_end].to_i || ""
-      }
+    query_select = "SELECT publications.title, publications.id, publications.year, publications.citation_count, authors.last_name, authors.id"
+    query_from = " FROM publications, authorships, authors"
+    query_where = "
+      publications.id = authorships.publication_id
+      AND
+      authors.id = authorships.author_id
+    "
+    query_terms = {}
 
     if filters_hash[:title] && filters_hash[:title] != ""
 
-      where_filters += " AND " unless where_filters.length == 0
-
-      where_filters += "
-        (title ILIKE :title_downcase)
+      query_where += " AND "
+      query_where += "
+        (publications.title ILIKE :pub_title)
       "
-
+      query_terms[:pub_title] = "%#{filters_hash[:title]}%"
     end
 
     if filters_hash[:date_start] && filters_hash[:date_start] != ""
-      where_filters += " AND " unless where_filters.length == 0
-      where_filters += "(year >= :date_start)"
+      query_where += " AND "
+      query_where += "(publications.year >= :date_start)"
+      query_terms[:date_start] = filters_hash[:date_start]
     end
-
     if filters_hash[:date_end] && filters_hash[:date_end] != ""
-      where_filters += " AND " unless where_filters.length == 0
-      where_filters += "(year <= :date_end)"
+      query_where += " AND "
+      query_where += "(publications.year <= :date_end)"
+      query_terms[:date_end] = filters_hash[:date_end]
     end
-
     if filters_hash[:author] && filters_hash[:author] != ''
-
-      #this will be a slowdown, cuz it has to run the query here and then again
-      search_object = search_object.joins(:authors)
-
-      where_filters += " AND " unless where_filters.length == 0
-      where_filters += "
-      (authors.last_name ILIKE :author_lastname)
-      "
+      query_where += " AND "
+      query_where += "authors.last_name ILIKE :author_lastname"
+      query_terms[:author_lastname] = "%#{filters_hash[:author]}%"
     end
+    query_order = " ORDER BY " + set_sort_order(sort_order)
+    # query_terms[:sort_order] =  'title asc' #set_sort_order(sort_order)
+    query = [query_select, query_from, query_where, query_order].join(' ')
+    p "find_by_sql(#{query}, #{query_terms})"
 
-    p "lllllllllllllll"
-    p sort_order
+    results = find_by_sql([query, query_terms])
+#
+    # Publication.includes(:authorships, :authors).where(['title ILIKE :title AND author.last_name ILIKE :last_name'], {:title => "consciousness", last_name => 'consciousness'}])
 
-    search_object.where(where_filters, where_terms).order(sort_order)
+    # ActiveRecord::Base.connection.execute(query, query_terms)
   end
 
   def set_sort_order order
 
-   sort_orders = {
-    'alpha' => {:title => :asc},
-    'alpha-desc' => {:title => :desc},
-    'citations' => {:citation_count => :asc},
-    'citations-desc' => {:citation_count => :desc},
-    'date' => {:date => :asc},
-    'date-desc' => {:date => :desc}
+    sort_orders = {
+      'alpha' => "title asc",
+      'alpha-desc' => "title desc",
+      'citations-desc' => 'citation_count desc',
+      'citations' => 'citation_count asc',
+      'date' => 'date asc',
+      'date-desc' => 'date desc'
     }
-
-    sort_orders[order] || :title
+    sort_orders[order] || "title"
 
   end
 

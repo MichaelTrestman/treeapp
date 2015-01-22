@@ -77,12 +77,14 @@
         </tr>
       </thead>
 
+
       <tbody>
         <% @publications.each do |publication| %>
           <tr>
             <td><%= link_to publication.title, publication %></td>
-            <td><%= publication.date %></td>
+            <td><%= publication.year %></td>
             <td><%= publication.citation_count ? publication.citation_count : 'unknown' %></td>
+
             <% if publication.authors[0] %>
             <td> <%= publication.authors[0].last_name %> </td>
             <% end %>

@@ -3,22 +3,33 @@
 
 things to do:
 
-  fix complex_search which is breaking shit with its slowness
 
-  contributor welcome page where you are prompted to edit a random page that is missing content, prioritized by linkage density? (e.g. topics with more tags)
+
+  add taxa, distribution hypotheses MVC
+
+  refactor complex_search
+
+
+  ui for contributors:
+    dashboard view with queue of tasks.
+    tagging topics, taxa and authorship
+    editing publications, authors, topics, taxa
+
+
+  add text module, picture gallery to taxa
+
+  add text module, url list for external resources to topic
+
+
+
 
   improve, modularize css;
 
-  model: taxa
-    tree-json generator
-    improve visualization
-    scrape in relevance from abstract and body like topics
-    show page with list of articles, image and video galleries
+  visualizations:
 
-  model: distribution-hypotheses
-    link to publications
+    dynamic pruning, budding for displayed trees
+    nested bubble packing layout
     tree-json generator
-    improve visualization
 
   web-scraping:
 
@@ -32,9 +43,7 @@ things to do:
 
     taxon mentions
 
-  ui for contributors:
-    tagging topics, taxa and authorships
-    improve views
+
 
   newick => json conversion;
 
@@ -51,16 +60,4 @@ things to do:
       show visualizations, which are centered on a given publication
 
         force tree with links to authors, date, and their associated pubs
-
-  index for tags
-
-  show for tags
-
-    list of pubs
-
-
-
-  distribution hypothesis
-
-    a pub can argue for or against
 

@@ -58,10 +58,10 @@ module PublicationsHelper
     sort_orders = {
       'alpha' => "title asc",
       'alpha-desc' => "title desc",
-      'citations-desc' => 'citation_count desc',
-      'citations' => 'citation_count asc',
-      'date' => 'date asc',
-      'date-desc' => 'date desc'
+      'citations-desc' => 'citation_count desc nulls last',
+      'citations' => 'citation_count asc nulls first',
+      'date' => 'year asc',
+      'date-desc' => 'year desc'
     }
     sort_orders[order] || :title
 

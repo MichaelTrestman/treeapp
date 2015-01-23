@@ -3,7 +3,7 @@ class CreateTaxons < ActiveRecord::Migration
     create_table :taxons do |t|
       t.string :scientific_name
       t.string :common_name
-      t.text
+      t.text :link_urls
     end
   end
 end

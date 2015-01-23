@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150119180737) do
+ActiveRecord::Schema.define(version: 20150123002955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,10 +54,29 @@ ActiveRecord::Schema.define(version: 20150119180737) do
     t.integer "publication_id"
   end
 
+  create_table "taxons", force: true do |t|
+    t.string "scientific_name"
+    t.string "common_name"
+    t.text   "link_urls"
+  end
+
   create_table "topics", force: true do |t|
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "trait_attributions", force: true do |t|
+    t.integer "trait_id"
+    t.integer "taxon_id"
+    t.integer "publication_id"
+    t.text    "reference"
+  end
+
+  create_table "traits", force: true do |t|
+    t.string "name"
+    t.text   "description"
+    t.text   "link_urls"
   end
 
 end

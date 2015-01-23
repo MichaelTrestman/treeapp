@@ -1,4 +1,5 @@
 class Author < ActiveRecord::Base
+  extend AuthorsHelper
   has_many :authorships
   has_many :publications, through: :authorships
   has_many :distributions, through: :publications

@@ -3,28 +3,6 @@
 # require 'debugger'
 
 
-# ok this one works
-# Publication.find_by_sql(
-#   " SELECT title, citation_count
-#     FROM publications, authorships, authors
-#     WHERE
-#       authorships.publication_id = publications.id
-#     AND
-#       authorships.author_id = authors.id
-#     AND
-#       publications.title ILIKE '%Animal%'
-#   ")
-
-# # this one freezes or whatever the fuck
-# Publication.find_by_sql([
-#   " SELECT title, citation_count
-#     FROM publications, authorships, authors
-#     WHERE
-#       authorships.publication_id = publications.id
-#     AND
-#       authorships.author_id = authors.id
-#     AND publications.title ILIKE  :titlebittle ", {:titlebittle => '%animal%'}])
-
 class Publication < ActiveRecord::Base
   extend PublicationsHelper
   has_many :authorships

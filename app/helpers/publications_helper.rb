@@ -1,12 +1,7 @@
 module PublicationsHelper
-  def complex_searchx(filters_hash={}, sort_order='alpha')
-    Publication.includes(:authors)
-  end
 
   def complex_search(filters_hash={}, sort_order='alpha')
 
-    query_select = "SELECT publications.title, publications.id, publications.year, publications.citation_count, authors.last_name, authors.id"
-    query_from = " FROM publications, authorships, authors"
     query_where = "
       publications.id = authorships.publication_id
       AND
@@ -38,16 +33,9 @@ module PublicationsHelper
       query_where += "authors.last_name ILIKE :author_lastname"
       query_terms[:author_lastname] = "%#{filters_hash[:author]}%"
     end
-    query_order = " ORDER BY " + set_sort_order(sort_order)
-    # query_terms[:sort_order] =  'title asc' #set_sort_order(sort_order)
-    query = [query_select, query_from, query_where, query_order].join(' ')
-    p "find_by_sql(#{query}, #{query_terms})"
+    query_order = set_sort_order(sort_order)
 
-    results = find_by_sql([query, query_terms])
-#
-    # Publication.includes(:authorships, :authors).where(['title ILIKE :title AND author.last_name ILIKE :last_name'], {:title => "consciousness", last_name => 'consciousness'}])
-
-    # ActiveRecord::Base.connection.execute(query, query_terms)
+    Publication.joins(:authors).where([query_where, query_terms]).order(set_sort_order sort_order)
   end
 
   def set_sort_order order
@@ -60,7 +48,7 @@ module PublicationsHelper
       'date' => 'date asc',
       'date-desc' => 'date desc'
     }
-    sort_orders[order] || "title"
+    sort_orders[order] || :title
 
   end
 

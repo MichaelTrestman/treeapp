@@ -3,11 +3,9 @@
 
 things to do:
 
-
-
   add taxa, distribution hypotheses MVC
 
-  refactor complex_search
+
 
 
   ui for contributors:
@@ -20,7 +18,9 @@ things to do:
 
   add text module, url list for external resources to topic
 
+  search for authors, topics, taxa, traits, attributions
 
+  deduping scripts for everything!!
 
 
   improve, modularize css;

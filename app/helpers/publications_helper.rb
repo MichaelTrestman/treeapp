@@ -7,6 +7,7 @@ module PublicationsHelper
       authors.id = authorships.author_id
     "
     query_terms = {}
+    join_args = []
 
     if filters_hash[:title] && filters_hash[:title] != ""
 
@@ -27,19 +28,29 @@ module PublicationsHelper
       query_where += "(publications.year <= :date_end)"
       query_terms[:date_end] = filters_hash[:date_end]
     end
+
+    join_args << :authors
+
     if filters_hash[:author] && filters_hash[:author] != ''
       query_where += " AND "
       query_where += "authors.last_name ILIKE :author_lastname"
       query_terms[:author_lastname] = "%#{filters_hash[:author]}%"
     end
     if filters_hash[:topic] && filters_hash[:topic] != ''
+      join_args << :topics
       query_where += " AND "
       query_where += "topics.title ILIKE :topic_title"
       query_terms[:topic_title] = "%#{filters_hash[:topic]}%"
     end
+
     query_order = set_sort_order(sort_order)
 
-    Publication.joins(:authors, :topics).where([query_where, query_terms]).order(set_sort_order sort_order)
+    # join_args = [:authors, :topics]
+
+    model_class = Publication
+
+    model_class.joins(*join_args).where([query_where, query_terms]).order(set_sort_order sort_order)
+
   end
 
   def set_sort_order order

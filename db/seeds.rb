@@ -1,9 +1,19 @@
-require_relative 'heroku_citation_seeder'
-require_relative 'biblio_parser'
+# require_relative 'heroku_citation_seeder'
+# require_relative 'biblio_parser'
+require_relative 'trait_attribution_seeds'
+
+
+
+
+
+
+
 
 # HerokuCitationSeeder.new.create_seed_txt
-Pub_and_Author_seeder.seed_from_biblio_txt 'db/animal_consciousness_SEP_biblio.txt'
-HerokuCitationSeeder.new.seed_from_txt
+
+# Pub_and_Author_seeder.seed_from_biblio_txt 'db/animal_consciousness_SEP_biblio.txt'
+
+# HerokuCitationSeeder.new.seed_from_txt
 
 # previous_name = {}
 

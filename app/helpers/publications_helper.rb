@@ -37,9 +37,15 @@ module PublicationsHelper
       query_where += "topics.title ILIKE :topic_title"
       query_terms[:topic_title] = "%#{filters_hash[:topic]}%"
     end
+
     query_order = set_sort_order(sort_order)
 
-    Publication.joins(:authors, :topics).where([query_where, query_terms]).order(set_sort_order sort_order)
+    join_args = [:authors, :topics]
+
+    model_class = Publication
+
+    model_class.joins(*join_args).where([query_where, query_terms]).order(set_sort_order sort_order)
+
   end
 
   def set_sort_order order

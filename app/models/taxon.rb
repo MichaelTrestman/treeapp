@@ -1,10 +1,10 @@
 class Taxon < ActiveRecord::Base
   serialize :link_urls, Array
 
-  has_many :mental_state_attributions
-
+  has_many :trait_attributions
+  has_many :traits, through: :trait_attributions
+  has_many :publications, through: :trait_attributions
   has_many :subtaxons, class_name: 'Taxon', foreign_key: 'supertaxon_id'
-
   belongs_to :supertaxon, class_name: 'Taxon'
 
   def add_subtaxon(subTaxonAttributes)

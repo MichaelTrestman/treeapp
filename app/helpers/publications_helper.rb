@@ -1,7 +1,6 @@
 module PublicationsHelper
 
   def complex_search(filters_hash={}, sort_order='alpha')
-
     query_where = "
       publications.id = authorships.publication_id
       AND
@@ -33,9 +32,14 @@ module PublicationsHelper
       query_where += "authors.last_name ILIKE :author_lastname"
       query_terms[:author_lastname] = "%#{filters_hash[:author]}%"
     end
+    if filters_hash[:topic] && filters_hash[:topic] != ''
+      query_where += " AND "
+      query_where += "topics.title ILIKE :topic_title"
+      query_terms[:topic_title] = "%#{filters_hash[:topic]}%"
+    end
     query_order = set_sort_order(sort_order)
 
-    Publication.joins(:authors).where([query_where, query_terms]).order(set_sort_order sort_order)
+    Publication.joins(:authors, :topics).where([query_where, query_terms]).order(set_sort_order sort_order)
   end
 
   def set_sort_order order

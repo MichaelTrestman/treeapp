@@ -13,7 +13,10 @@
       <% @publications.each do |pub| %>
           <li class='hover-red'>
             <a href='/publications/<%= pub.id %>'>
-              <%= pub.title %> | <%= pub.date %>| <%= pub.authors[0].last_name %>
+              <%= pub.title %> | <%= pub.date %>|
+              <% if pub.authors.count > 0 %>
+                <%= pub.authors[0].last_name  %>
+               <% end %>
             </a>
           </li>
           <br>

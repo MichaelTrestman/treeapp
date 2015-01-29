@@ -6,8 +6,6 @@ things to do:
   add taxa, distribution hypotheses MVC
 
 
-
-
   ui for contributors:
     dashboard view with queue of tasks.
     tagging topics, taxa and authorship
@@ -42,6 +40,7 @@ things to do:
   text-scraper:
 
     taxon mentions
+    topics, taxa for abstract, whole-text
 
 
 
